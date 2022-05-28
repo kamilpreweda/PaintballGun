@@ -8,18 +8,24 @@ namespace PaintballGun
 {
     public class PaintballGun
     {
-        public const int MAGAZINE_SIZE = 16;
 
-        private int balls = 0;
-        private int ballsLoaded = 0;
-
-        public int BallsLoaded
+        public PaintballGun(int balls, int magazineSize, bool loaded)
         {
-            get { return ballsLoaded; }
-            set { ballsLoaded = value; }
+            this.balls = balls;
+            MagazineSize = magazineSize;
+            if (!loaded) Reload();
         }
 
-        public bool IsEmpty() { return ballsLoaded == 0; }
+
+        public int MagazineSize { get; private set; } = 16;
+
+        private int balls = 0;
+
+        public int BallsLoaded { get; private set; }
+
+
+
+        public bool IsEmpty() { return BallsLoaded == 0; }
         public int Balls
         {
             get { return balls; }
@@ -34,17 +40,18 @@ namespace PaintballGun
 
         public void Reload()
         {
-            if (balls > MAGAZINE_SIZE) ballsLoaded = MAGAZINE_SIZE;
-            else ballsLoaded = balls;
+            if (balls > MagazineSize) BallsLoaded = MagazineSize;
+            else BallsLoaded = balls;
            
         }
 
         public bool Shoot()
         {
-            if (ballsLoaded == 0) return false;
-            ballsLoaded--;
+            if (BallsLoaded == 0) return false;
+            BallsLoaded--;
             balls--;
             return true;
         }
+        
     }
 }
