@@ -15,20 +15,21 @@ namespace PaintballGun
 
         public int GetBallsLoaded() { return ballsLoaded; }
         public bool IsEmpty() { return ballsLoaded == 0; }
-        public int GetBalls() { return balls; }
-
-        public void SetBalls(int numberOfBalls)
+        public int Balls
         {
-            if (numberOfBalls > 0)
+            get { return balls; }
+
+            set
             {
-                balls = numberOfBalls;
+                if (value > 0)
+                    balls = value;
                 Reload();
             }
         }
 
         public void Reload()
         {
-            if (ballsLoaded > MAGAZINE_SIZE) ballsLoaded = MAGAZINE_SIZE;
+            if (balls > MAGAZINE_SIZE) ballsLoaded = MAGAZINE_SIZE;
             else ballsLoaded = balls;
            
         }
